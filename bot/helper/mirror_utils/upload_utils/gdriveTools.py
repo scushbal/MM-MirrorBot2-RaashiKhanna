@@ -546,7 +546,7 @@ class GoogleDriveHelper:
                     nxt_page += 1
             telegraph.edit_page(
                 path = self.path[prev_page],
-                title = 'Mirror-Leech-Bot Drive Search',
+                title = '🔎 DREAMCATCHER MIRROR BOT DRIVE SEARCH 🔍',
                 content=content
             )
         return
@@ -733,7 +733,7 @@ class GoogleDriveHelper:
         for content in self.telegraph_content:
             self.path.append(
                 telegraph.create_page(
-                    title='Mirror-Leech-Bot Drive Search',
+                    title='🔎 DREAMCATCHER MIRROR BOT DRIVE SEARCH 🔍',
                     content=content
                 )["path"]
             )
@@ -742,9 +742,9 @@ class GoogleDriveHelper:
         if self.num_of_path > 1:
             self.edit_telegraph()
 
-        msg = f"<b>Found {contents_count} result for <i>{fileName}</i></b>"
+        msg = f"<b>📂 Found {contents_count} Result for {fileName} 👇</b>"
         buttons = button_build.ButtonMaker()
-        buttons.buildbutton("🔎 VIEW", f"https://telegra.ph/{self.path[0]}")
+        buttons.buildbutton("🔎 VIEW YOUR RESULTS 🔍", f"https://telegra.ph/{self.path[0]}")
 
         return msg, InlineKeyboardMarkup(buttons.build_menu(1))
 
