@@ -208,8 +208,8 @@ class MirrorListener:
                     update_all_messages()
             count = len(files)
             msg = f'<b>📂 Movie Name : </b><code>{link}</code>\n\n'
-            msg += f'<b>💽 Size : </b>{bot_utils.get_readable_file_size(size)}\n'
-            msg += f'<b>🗂️ Total Files : </b>{count}'
+            msg += f'<b>💽 Size : {bot_utils.get_readable_file_size(size)}</b>\n'
+            msg += f'<b>🗂️ Total Files : {count}<{b>'
             if typ != 0:
                 msg += f'\n<b>📚 Corrupted Files : </b>{typ}'
             if self.message.chat.type == 'private':
@@ -232,11 +232,11 @@ class MirrorListener:
             return
 
         with download_dict_lock:
-            msg = f'<b>📂 Movie Name : </b><code>{download_dict[self.uid].name()}</code>\n\n<b>💽 Size : </b>{size}'
-            msg += f'\n<b>📦 Type : </b>{typ}'
+            msg = f'<b>📂 Movie Name : </b><code>{download_dict[self.uid].name()}</code>\n\n<b>💽 Size : {size}</b>'
+            msg += f'\n<b>📦 Type : {typ}</b>'
             if os.path.isdir(f'{DOWNLOAD_DIR}/{self.uid}/{download_dict[self.uid].name()}'):
-                msg += f'\n<b>📁 SubFolders : </b>{folders}'
-                msg += f'\n<b>🗂️ Files : </b>{files}'
+                msg += f'\n<b>📁 SubFolders : {folders}</b>'
+                msg += f'\n<b>🗂️ Files : {files}</b>'
             buttons = button_build.ButtonMaker()
             link = short_url(link)
             buttons.buildbutton("💾 Drive Link 💾", link)
