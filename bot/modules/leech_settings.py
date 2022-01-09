@@ -114,7 +114,7 @@ def setThumb(update, context):
         msg = f"<b>🗺️ Custom Thumbnail Saved For <a href='tg://user?id={user_id}'>{update.message.from_user.full_name}</a></b> 🤒."
         sendMessage(msg, context.bot, update)
     else:
-        sendMessage("<b>🗺️ Reply to a Photo to Save Custom Thumbnail ❌", context.bot, update)
+        sendMessage("Reply to a Photo to Save Custom Thumbnail", context.bot, update)
 
 leech_set_handler = CommandHandler(BotCommands.LeechSetCommand, leechSet, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
 set_thumbnail_handler = CommandHandler(BotCommands.SetThumbCommand, setThumb, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
