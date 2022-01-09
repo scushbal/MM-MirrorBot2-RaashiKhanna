@@ -17,11 +17,11 @@ def list_buttons(update, context):
     except IndexError:
         return sendMessage('Send a search key along with command', context.bot, update)
     buttons = button_build.ButtonMaker()
-    buttons.sbutton("Drive Root", f"types {user_id} root")
-    buttons.sbutton("Recursive", f"types {user_id} recu")
-    buttons.sbutton("Cancel", f"types {user_id} cancel")
+    buttons.sbutton("💾 Drive Root 💾", f"types {user_id} root")
+    buttons.sbutton("🔄 Recursive 🔄", f"types {user_id} recu")
+    buttons.sbutton("❌ Cancel ❌", f"types {user_id} cancel")
     button = InlineKeyboardMarkup(buttons.build_menu(2))
-    sendMarkup('Choose option to list.', context.bot, update, button)
+    sendMarkup('<b>Choose Option to List 👇</b>', context.bot, update, button)
 
 def select_type(update, context):
     query = update.callback_query
@@ -35,21 +35,21 @@ def select_type(update, context):
     elif data[2] in ["root", "recu"]:
         query.answer()
         buttons = button_build.ButtonMaker()
-        buttons.sbutton("Folders", f"types {user_id} folders {data[2]}")
-        buttons.sbutton("Files", f"types {user_id} files {data[2]}")
-        buttons.sbutton("Both", f"types {user_id} both {data[2]}")
-        buttons.sbutton("Cancel", f"types {user_id} cancel")
+        buttons.sbutton("🗂️ Folders 🗂️", f"types {user_id} folders {data[2]}")
+        buttons.sbutton("📁 Files 📂", f"types {user_id} files {data[2]}")
+        buttons.sbutton("🗂️ Both 📂", f"types {user_id} both {data[2]}")
+        buttons.sbutton("❌ Cancel ❌", f"types {user_id} cancel")
         button = InlineKeyboardMarkup(buttons.build_menu(2))
-        editMessage('Choose option to list.', msg, button)
+        editMessage('<b>Choose Option to List 👇</b>', msg, button)
     elif data[2] in ["files", "folders", "both"]:
         query.answer()
         list_method = data[3]
         item_type = data[2]
-        editMessage(f"<b>Searching for <i>{key}</i></b>", msg)
+        editMessage(f"<b>🔎 Searching for {key}</b>", msg)
         threading.Thread(target=_list_drive, args=(key, msg, list_method, item_type)).start()
     else:
         query.answer()
-        editMessage("list has been canceled!", msg)
+        editMessage("<b>❌ list has been canceled! 🤒</b>", msg)
 
 def _list_drive(key, bmsg, list_method, item_type):
     LOGGER.info(f"listing: {key}")
@@ -59,7 +59,7 @@ def _list_drive(key, bmsg, list_method, item_type):
     if button:
         editMessage(msg, bmsg, button)
     else:
-        editMessage(f'No result found for <i>{key}</i>', bmsg)
+        editMessage(f'<b>❌ No Result Found for {key}</b>', bmsg)
 
 list_handler = CommandHandler(BotCommands.ListCommand, list_buttons, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
 list_type_handler = CallbackQueryHandler(select_type, pattern="types", run_async=True)
