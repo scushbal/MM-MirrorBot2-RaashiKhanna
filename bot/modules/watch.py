@@ -132,7 +132,7 @@ def _watch(bot, update, isZip=False, isLeech=False, pswd=None, tag=None):
         buttons.sbutton("❌ Cancel ❌", f"qu {msg_id} cancel")
         YTBUTTONS = InlineKeyboardMarkup(buttons.build_menu(2))
         listener_dict[msg_id] = [listener, user_id, link, name, YTBUTTONS, formats_dict]
-        bmsg = sendMarkup('Choose Video Quality:', bot, update, YTBUTTONS)
+        bmsg = sendMarkup('<b>🖥️ Choose Video Quality: 👇</b>', bot, update, YTBUTTONS)
 
     threading.Thread(target=_auto_cancel, args=(bmsg, msg_id)).start()
 
