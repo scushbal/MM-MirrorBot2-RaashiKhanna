@@ -118,7 +118,7 @@ class GoogleDriveHelper:
         try:
             file_id = self.getIdFromUrl(link)
         except (KeyError, IndexError):
-            msg = "Google Drive ID could not be found in the provided link"
+            msg = "<b>Google Drive ID could not be found in the provided link</b>"
             return msg
         msg = ''
         try:
@@ -126,7 +126,7 @@ class GoogleDriveHelper:
             msg = "Successfully deleted"
             LOGGER.info(f"Delete Result: {msg}")
         except HttpError as err:
-            if "File not found" in str(err):
+            if "<b>File not found</b>" in str(err):
                 msg = "No such file exist"
             elif "insufficientFilePermissions" in str(err):
                 msg = "Insufficient File Permissions"
@@ -264,7 +264,7 @@ class GoogleDriveHelper:
                 dir_id = self.create_directory(os.path.basename(os.path.abspath(file_name)), parent_id)
                 result = self.upload_dir(file_path, dir_id)
                 if result is None:
-                    raise Exception('Upload has been manually cancelled!')
+                    raise Exception('<b>Upload has been manually cancelled!</b>')
                 link = f"https://drive.google.com/folderview?id={dir_id}"
                 if self.is_cancelled:
                     LOGGER.info("Deleting uploaded data from Drive...")
@@ -353,7 +353,7 @@ class GoogleDriveHelper:
         try:
             file_id = self.getIdFromUrl(link)
         except (KeyError, IndexError):
-            msg = "Google Drive ID could not be found in the provided link"
+            msg = "<b>Google Drive ID could not be found in the provided link</b>"
             return msg
         msg = ""
         LOGGER.info(f"File ID: {file_id}")
@@ -367,35 +367,35 @@ class GoogleDriveHelper:
                 if self.is_cancelled:
                     LOGGER.info("Deleting cloned data from Drive...")
                     self.deletefile(durl)
-                    return "your clone has been stopped and cloned data has been deleted!", "cancelled"
-                msg += f'<b>Name: </b><code>{meta.get("name")}</code>\n\n<b>Size: </b>{get_readable_file_size(self.transferred_size)}'
-                msg += '\n\n<b>Type: </b>Folder'
-                msg += f'\n<b>SubFolders: </b>{self.__total_folders}'
-                msg += f'\n<b>Files: </b>{self.__total_files}'
+                    return "<b>♻️ your clone has been stopped and cloned data has been 🗑️ deleted!</b>", "<b>❌ cancelled 😁</b>"
+                msg += f'<b>📂 Movie Name : </b><code>{meta.get("name")}</code>\n\n<b>💽 Size : {get_readable_file_size(self.transferred_size)}</b>'
+                msg += '\n<b>📦 Type : Folder</b>'
+                msg += f'\n<b>📁 SubFolders : {self.__total_folders}</b>'
+                msg += f'\n<b>🗂️ Files : {self.__total_files}</b>'
                 buttons = button_build.ButtonMaker()
                 durl = short_url(durl)
-                buttons.buildbutton("☁️ Drive Link", durl)
+                buttons.buildbutton("💾 Drive Link 💾", durl)
                 if INDEX_URL is not None:
                     url_path = requests.utils.quote(f'{meta.get("name")}')
                     url = f'{INDEX_URL}/{url_path}/'
                     url = short_url(url)
-                    buttons.buildbutton("⚡ Index Link", url)
+                    buttons.buildbutton("🚀 Index Link 🚀", url)
             else:
                 file = self.copyFile(meta.get('id'), parent_id)
-                msg += f'<b>Name: </b><code>{file.get("name")}</code>'
+                msg += f'<b>📂 Name : </b><code>{file.get("name")}</code>'
                 durl = self.__G_DRIVE_BASE_DOWNLOAD_URL.format(file.get("id"))
                 buttons = button_build.ButtonMaker()
                 durl = short_url(durl)
-                buttons.buildbutton("☁️ Drive Link", durl)
+                buttons.buildbutton("💾 Drive Link 💾", durl)
                 if mime_type is None:
                     mime_type = 'File'
-                msg += f'\n\n<b>Size: </b>{get_readable_file_size(int(meta.get("size", 0)))}'
-                msg += f'\n\n<b>Type: </b>{mime_type}'
+                msg += f'\n\n<b>💽 Size : {get_readable_file_size(int(meta.get("size", 0)))}</b>'
+                msg += f'\n<b>📦 Type : </b>{mime_type}</b>'
                 if INDEX_URL is not None:
                     url_path = requests.utils.quote(f'{file.get("name")}')
                     url = f'{INDEX_URL}/{url_path}'
                     url = short_url(url)
-                    buttons.buildbutton("⚡ Index Link", url)
+                    buttons.buildbutton("🚀 Index Link 🚀", url)
                     if VIEW_LINK:
                         urls = f'{INDEX_URL}/{url_path}?a=view'
                         urls = short_url(urls)
@@ -419,7 +419,7 @@ class GoogleDriveHelper:
                 if token_service is not None:
                     self.__service = token_service
                     return self.clone(link)
-                msg = "File not found."
+                msg = "<b>📂 File not found ❌</b>"
             else:
                 msg = f"Error.\n{err}"
             return msg, ""
@@ -546,7 +546,7 @@ class GoogleDriveHelper:
                     nxt_page += 1
             telegraph.edit_page(
                 path = self.path[prev_page],
-                title = 'Mirror-Leech-Bot Drive Search',
+                title = '🔎 DREAMCATCHER MIRROR BOT SEWRCH 🔍',
                 content=content
             )
         return
@@ -733,7 +733,7 @@ class GoogleDriveHelper:
         for content in self.telegraph_content:
             self.path.append(
                 telegraph.create_page(
-                    title='Mirror-Leech-Bot Drive Search',
+                    title='🔎 DREAMCATCHER MIRROR BOT SEARCH 🔍',
                     content=content
                 )["path"]
             )
@@ -742,9 +742,9 @@ class GoogleDriveHelper:
         if self.num_of_path > 1:
             self.edit_telegraph()
 
-        msg = f"<b>Found {contents_count} result for <i>{fileName}</i></b>"
+        msg = f"<b>📁 Found {contents_count} Result For : {fileName} 👇</b>"
         buttons = button_build.ButtonMaker()
-        buttons.buildbutton("🔎 VIEW", f"https://telegra.ph/{self.path[0]}")
+        buttons.buildbutton("🔎 VIEW YOUR RESULT 🔍", f"https://telegra.ph/{self.path[0]}")
 
         return msg, InlineKeyboardMarkup(buttons.build_menu(1))
 
