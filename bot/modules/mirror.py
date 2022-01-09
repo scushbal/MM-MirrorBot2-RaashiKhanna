@@ -209,7 +209,7 @@ class MirrorListener:
             count = len(files)
             msg = f'<b>📂 Movie Name : </b><code>{link}</code>\n\n'
             msg += f'<b>💽 Size : {bot_utils.get_readable_file_size(size)}</b>\n'
-            msg += f'<b>🗂️ Total Files : {count}<{b>'
+            msg += f'<b>🗂️ Total Files : {count}<b>'
             if typ != 0:
                 msg += f'\n<b>📚 Corrupted Files : </b>{typ}'
             if self.message.chat.type == 'private':
