@@ -46,10 +46,10 @@ def cloneNode(update, context):
         if res != "":
             return sendMessage(res, context.bot, update)
         if STOP_DUPLICATE:
-            LOGGER.info('Checking File/Folder if already in Drive...')
+            LOGGER.info('<b>Checking File/Folder if already in Drive...</b>')
             smsg, button = gd.drive_list(name, True, True)
             if smsg:
-                msg3 = "<b>📂 File / Folder is already Available in Drive 🤗\n\n🔎 Here are the Search Results 👇"
+                msg3 = "<b>📂 File/Folder is already Available in Drive 🤗</b>\n\n<b>🔎 Here are the Search Results : 👇</b>"
                 sendMarkup(msg3, context.bot, update, button)
                 if gdtot_link:
                     gd.deletefile(link)
