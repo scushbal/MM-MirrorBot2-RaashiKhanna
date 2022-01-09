@@ -49,7 +49,7 @@ def cloneNode(update, context):
             LOGGER.info('Checking File/Folder if already in Drive...')
             smsg, button = gd.drive_list(name, True, True)
             if smsg:
-                msg3 = "📂 File / Folder is already Available in Drive.\nHere are the Search Results 👇"
+                msg3 = "<b>📂 File / Folder is already Available in Drive 🤗\n\n🔎 Here are the Search Results 👇"
                 sendMarkup(msg3, context.bot, update, button)
                 if gdtot_link:
                     gd.deletefile(link)
@@ -83,7 +83,7 @@ def cloneNode(update, context):
                     update_all_messages()
             except IndexError:
                 pass
-        cc = f'\n\n<b>👤 Cloned By : {tag}</b>'
+        cc = f'\n\n<b>📫 Cloned By : {tag}</b>'
         if button in ["cancelled", ""]:
             sendMessage(f"{tag} {result}", context.bot, update)
         else:
@@ -91,7 +91,7 @@ def cloneNode(update, context):
         if gdtot_link:
             gd.deletefile(link)
     else:
-        sendMessage('<b>Send Gdrive or Gdtot Link along with Command or By Replying to the Link by Command</b>', context.bot, update)
+        sendMessage('<b>📨 Send Gdrive or Gdtot Link along with Command or By Replying to the Link by Command 🤨</b>', context.bot, update)
 
 clone_handler = CommandHandler(BotCommands.CloneCommand, cloneNode, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
 dispatcher.add_handler(clone_handler)
