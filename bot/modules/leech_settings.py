@@ -42,7 +42,7 @@ def getleechinfo(from_user):
 
     button = InlineKeyboardMarkup(buttons.build_menu(1))
 
-    text = f"<b>⚙️ Leech Settings for : <a href='tg://user?id={user_id}'>{name}</a></b>\n"\
+    text = f"<b>⚙️ Leech Settings for : <a href='tg://user?id={user_id}'>{name}</a></b>\n\n"\
            f"<b>✅ Leech Type : {ltype}</b>\n"\
            f"<b>🌌 Custom Thumbnail : {thumbmsg}</b>"
     return text, button
@@ -111,7 +111,7 @@ def setThumb(update, context):
         os.remove(photo_dir)
         if DB_URI is not None:
             DbManger().user_save_thumb(user_id, des_dir)
-        msg = f"<b>🗺️ Custom Thumbnail Saved For <a href='tg://user?id={user_id}'>{update.message.from_user.full_name}</a></b>✅."
+        msg = f"<b>🗺️ Custom Thumbnail Saved For <a href='tg://user?id={user_id}'>{update.message.from_user.full_name}</a></b> 🤒."
         sendMessage(msg, context.bot, update)
     else:
         sendMessage("<b>🗺️ Reply to a Photo to Save Custom Thumbnail ❌", context.bot, update)
