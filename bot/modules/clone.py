@@ -46,7 +46,7 @@ def cloneNode(update, context):
         if res != "":
             return sendMessage(res, context.bot, update)
         if STOP_DUPLICATE:
-            LOGGER.info('<b>Checking File/Folder if already in Drive...</b>')
+            LOGGER.info('Checking File/Folder if already in Drive...')
             smsg, button = gd.drive_list(name, True, True)
             if smsg:
                 msg3 = "<b>📂 File/Folder is already Available in Drive 🤗</b>\n\n<b>🔎 Here are the Search Results : 👇</b>"
@@ -83,7 +83,7 @@ def cloneNode(update, context):
                     update_all_messages()
             except IndexError:
                 pass
-        cc = f'\n\n<b>📫 Cloned By : {tag}</b>'
+        cc = f'\n\n<b>📫 Cloned By : {tag}\n\n💫 𝑷𝒐𝒘𝒆𝒓𝒆𝒅 𝑩𝒚 : 𝑾𝒉𝒊𝒕𝑬_𝑫𝒆𝒗𝒊𝑳𝟎𝟗</b>'
         if button in ["cancelled", ""]:
             sendMessage(f"{tag} {result}", context.bot, update)
         else:
