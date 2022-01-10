@@ -72,7 +72,7 @@ def start(update, context):
 '''
         sendMarkup(start_string, context.bot, update, reply_markup)
     else:
-        sendMarkup('😎 Oops! Not Authorized user, deploy your own mirror-leech bot 🤗</b>', context.bot, update, reply_markup)
+        sendMarkup('<b>😎 Oops! Your Not Authorized user, Deploy Your Own Mirror-Leech Bot 🤗</b>', context.bot, update, reply_markup)
 
 def restart(update, context):
     restart_message = sendMessage("Restarting...", context.bot, update)
