@@ -183,7 +183,7 @@ class MirrorListener:
             except Exception as e:
                 LOGGER.error(str(e))
             count = len(download_dict)
-        msg = f"{self.tag} your download has been stopped due to: {error}"
+        msg = f"<b>{self.tag} Your Download has been Stopped Due to: {error} 🤐</b>"
         sendMessage(msg, self.bot, self.update)
         if count == 0:
             self.clean()
@@ -207,16 +207,16 @@ class MirrorListener:
                 else:
                     update_all_messages()
             count = len(files)
-            msg = f'<b>Name: </b><code>{link}</code>\n\n'
-            msg += f'<b>Size: </b>{bot_utils.get_readable_file_size(size)}\n'
-            msg += f'<b>Total Files: </b>{count}'
+            msg = f'<b>📂 Movie Name : </b><code>{link}</code>\n\n'
+            msg += f'<b>💽 Size : {bot_utils.get_readable_file_size(size)}</b>\n'
+            msg += f'<b>🗂️ Total Files : {count}</b>'
             if typ != 0:
-                msg += f'\n<b>Corrupted Files: </b>{typ}'
+                msg += f'\n<b>📚 Corrupted Files : {typ}</b>'
             if self.message.chat.type == 'private':
                 sendMessage(msg, self.bot, self.update)
             else:
                 chat_id = str(self.message.chat.id)[4:]
-                msg += f'\n<b>cc: </b>{self.tag}\n\n'
+                msg += f'\n<b>📬 Leeched By : {self.tag}</b>\n\n'
                 fmsg = ''
                 for index, item in enumerate(list(files), start=1):
                     msg_id = files[item]
