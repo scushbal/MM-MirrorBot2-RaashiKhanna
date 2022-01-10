@@ -60,7 +60,7 @@ def cloneNode(update, context):
                 msg2 = f'Failed, Clone limit is {CLONE_LIMIT}GB.\nYour File/Folder size is {get_readable_file_size(size)}.'
                 return sendMessage(msg2, context.bot, update)
         if files <= 10:
-            msg = sendMessage(f"<b>♻️Cloning :</b> <code>{link}</code>", context.bot, update)
+            msg = sendMessage(f"<b>♻️ Cloning :</b> <code>{link}</code>", context.bot, update)
             result, button = gd.clone(link)
             deleteMessage(context.bot, msg)
         else:
